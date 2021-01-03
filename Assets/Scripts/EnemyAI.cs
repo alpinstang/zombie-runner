@@ -20,30 +20,37 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        distanceToTarget = Vector3.Distance(transform.position, target.position);
-        if(isProvoked)
+        distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if (isProvoked)
         {
             EngageTarget();
-        } else if(distanceToTarget <= chaseRange)
+        }
+        else if (distanceToTarget <= chaseRange)
         {
             isProvoked = true;
-            navMeshAgent.SetDestination(target.position);
         }
     }
 
     private void EngageTarget()
     {
-        if(distanceToTarget <= chaseRange)
+        if (distanceToTarget >= navMeshAgent.stoppingDistance)
         {
             ChaseTarget();
         }
 
-        if()
-        print("enemy attacking player!");
+        if (distanceToTarget <= navMeshAgent.stoppingDistance)
+        {
+            AttackTarget();
+        }
     }
 
     private void ChaseTarget()
     {
         navMeshAgent.SetDestination(target.position);
+    }
+
+    private void AttackTarget()
+    {
+        print("attack");
     }
 }

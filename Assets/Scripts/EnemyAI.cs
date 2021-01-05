@@ -55,5 +55,7 @@ public class EnemyAI : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("attack", true);
         print("attack");
+        var attackScript = GetComponent<EnemyAttack>();
+        attackScript.AttackHitEvent();
     }
 }
